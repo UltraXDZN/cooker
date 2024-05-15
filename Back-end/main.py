@@ -5,7 +5,6 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from firebase_admin import auth as firebase_auth
 from auth import register_user, login_user, get_current_user
 from schemas import UserRegisterSchema, TokenSchema, CommentSchema
-from typing import List
 from events import (
     create_event,
     EventSchema,
@@ -16,6 +15,7 @@ from events import (
 )
 import database  # Ensure database.py is imported to initialize Firebase Admin SDK
 from dotenv import load_dotenv
+from typing import List
 
 # Load environment variables from .env file
 load_dotenv()
