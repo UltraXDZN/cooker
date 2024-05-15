@@ -11,9 +11,16 @@ const dummyEvents = [
     status: "todo",
     analyst_comments: [
       {
+        index: 1,
         comment: "comment 1",
         timestamp: "2024-01-01T00:00:00",
         username: "username1",
+      },
+      {
+        index: 2,
+        comment: "comment 2",
+        timestamp: "2024-01-01T00:00:00",
+        username: "username2",
       },
     ],
   },
