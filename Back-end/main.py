@@ -4,7 +4,7 @@ from firebase_admin import auth as firebase_auth
 from auth import register_user, login_user, get_current_user
 from schemas import UserRegisterSchema, TokenSchema
 from events import create_event, EventSchema, edit_event
-from firebase_admin import db
+import database  # Ensure database.py is imported to initialize Firebase Admin SDK
 
 app = FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
@@ -27,7 +27,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
 async def read_users_me(
     current_user: firebase_auth.UserRecord = Depends(get_current_user),
 ):
-    user_doc = db.reference(f"users/{current_user.uid}").get()
+    user_doc = database.db.reference(f"users/{current_user.uid}").get()
     if not user_doc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="User not found"

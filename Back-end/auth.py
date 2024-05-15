@@ -2,7 +2,6 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from firebase_admin import auth as firebase_auth
 from firebase_admin import db
-
 from passlib.context import CryptContext
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
@@ -50,7 +49,7 @@ def login_user(email, password):
         # Get user by email
         user = firebase_auth.get_user_by_email(email)
 
-        # Verify password (Firebase Authentication handles this internally, so we simulate it here)
+        # Verify password
         user_ref = db.reference(f"users/{user.uid}")
         user_data = user_ref.get()
 
@@ -62,13 +61,13 @@ def login_user(email, password):
 
         custom_token = firebase_auth.create_custom_token(user.uid)
         return custom_token
-    except firebase_auth.AuthError:
+    except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password"
         )
 
 
-async def get_current_user(token: str):
+async def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
         decoded_token = firebase_auth.verify_id_token(token)
         user = firebase_auth.get_user(decoded_token["uid"])
