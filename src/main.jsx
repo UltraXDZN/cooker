@@ -6,6 +6,7 @@ import HomePage from "./routes/home";
 import LoginPage from "./routes/login";
 import RegisterPage from "./routes/register";
 import EventsPage from "./routes/events";
+import EventPage from "./routes/event";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/events",
     element: <EventsPage />,
+  },
+  {
+    path: "/events/:eventID",
+    element: <EventPage />,
   },
 ]);
 
