@@ -9,6 +9,7 @@ export default function EventPage() {
   const [event, setEvent] = useState({});
   const [editCommentIndex, setEditCommentIndex] = useState(null);
   const [editedComment, setEditedComment] = useState(null);
+  const [newComment, setNewComment] = useState(null);
 
   useEffect(() => {
     setEvent(
@@ -28,20 +29,47 @@ export default function EventPage() {
   };
 
   const confirmEditComment = (index) => {
-    setCommentState((prevComments) => {
-      const updatedComments = [...prevComments];
-      updatedComments[index].comment = editedComment;
-      return updatedComments;
+    const updatedComments = [...event.analyst_comments];
+    updatedComments[index - 1].comment = editedComment;
+
+    setEvent({
+      ...event,
+      analyst_comments: updatedComments,
     });
     setEditCommentIndex(null);
   };
 
   const handleRemoveComment = (index) => {
-    setEvent(
-      (prevEvent) =>
-        event.analyst_comments.filter((comment) => comment.index !== index) ||
-        prevEvent
+    const updatedComments = event.analyst_comments.filter(
+      (comment) => comment.index !== index
     );
+
+    setEvent({
+      ...event,
+      analyst_comments: updatedComments,
+    });
+  };
+
+  const handleCreateNewComment = () => {
+    const newIndex = event.analyst_comments.length + 1;
+
+    const updatedComments = [
+      ...event.analyst_comments,
+      {
+        index: newIndex,
+        comment: newComment,
+        timestamp: new Date().toISOString(),
+        username: "current_user", // Assuming current user is adding the comment
+      },
+    ];
+
+    setEvent({
+      ...event,
+      analyst_comments: updatedComments,
+    });
+
+    // You can also make an API call to update the server-side data here
+    setNewComment("");
   };
 
   return (
@@ -107,6 +135,20 @@ export default function EventPage() {
         </div>
         <div className="flex flex-col gap-2">
           <span className="font-bold">Comments:</span>
+          <div>
+            <input
+              type="text"
+              className="rounded p-2 w-full border-2"
+              placeholder="New Comment"
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <button
+              className=" bg-blue-600 text-white rounded-lg py-2 px-8 text-center my-2"
+              onClick={handleCreateNewComment}
+            >
+              Add Comment
+            </button>
+          </div>
           {event && event.analyst_comments ? (
             event.analyst_comments.map((comment) => (
               <div
@@ -146,7 +188,7 @@ export default function EventPage() {
                   {editCommentIndex === comment.index ? (
                     <button
                       className=" bg-blue-600 text-white rounded-lg py-2 px-8 text-center"
-                      onClick={() => confirmEditComment()}
+                      onClick={() => confirmEditComment(comment.index)}
                     >
                       Confirm
                     </button>
