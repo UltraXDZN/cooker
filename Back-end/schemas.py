@@ -72,3 +72,6 @@ class EventSchema(BaseModel):
             "malicious_domain_registration_date"
         ].isoformat()
         return data
+
+class ForgotPasswordSchema(BaseModel):
+    email: EmailStr
