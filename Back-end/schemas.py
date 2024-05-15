@@ -61,8 +61,11 @@ class EventSchema(BaseModel):
     @root_validator(pre=True)
     def convert_dates(cls, values):
         if isinstance(values.get("malicious_domain_registration_date"), str):
+            date_str = values["malicious_domain_registration_date"]
+            if date_str.endswith("Z"):
+                date_str = date_str[:-1]  # Remove the 'Z'
             values["malicious_domain_registration_date"] = datetime.fromisoformat(
-                values["malicious_domain_registration_date"]
+                date_str
             )
         return values
 
@@ -72,6 +75,7 @@ class EventSchema(BaseModel):
             "malicious_domain_registration_date"
         ].isoformat()
         return data
+
 
 class ForgotPasswordSchema(BaseModel):
     email: EmailStr
