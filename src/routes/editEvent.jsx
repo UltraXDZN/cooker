@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Header from "../components/header";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-export default function CreateEventPage() {
+export default function EditEventPage() {
+  const { eventID } = useParams();
+
   const [name, setName] = useState("");
   const [affected_brand, setAffectedBrand] = useState("");
   const [description, setDescription] = useState("");
@@ -14,11 +16,7 @@ export default function CreateEventPage() {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = () => {
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match!");
-    }
-  };
+  const handleSubmit = () => {};
 
   const ex = {
     id: 1,
