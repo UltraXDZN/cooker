@@ -2,7 +2,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from firebase_admin import auth as firebase_auth
 import firebase_admin.auth
-from .database import db
+from database import db
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 

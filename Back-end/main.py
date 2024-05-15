@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from firebase_admin import auth as firebase_auth
 from auth import register_user, login_user, get_current_user
 from database import db
-from schemas import UserRegisterSchema, UserLoginSchema, TokenSchema
+from schemas import UserRegisterSchema, TokenSchema
 
 app = FastAPI()
 
