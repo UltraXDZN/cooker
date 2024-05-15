@@ -237,3 +237,8 @@ This project provides a secure backend API for tracking phishing events, impleme
         }
     ]
     ```
+
+## Project Management
+
+We used Trello for task management and tracking progress. You can view our project board [here](https://trello.com/b/wmdV45Zn/cooker-stem-games-project).
+
