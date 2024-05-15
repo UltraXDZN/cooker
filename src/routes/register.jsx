@@ -3,8 +3,7 @@ import Header from "../components/header";
 import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,24 +33,9 @@ export default function RegisterPage() {
             className="rounded-full border-2 py-2 px-4"
             placeholder="Name..."
             required
-            value={name}
+            value={username}
             onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-        </div>
-        <div className="flex flex-col gap-2 py-2">
-          <label>
-            Surname <span className="text-red-400">*</span>
-          </label>
-          <input
-            type="text"
-            className="rounded-full border-2 py-2 px-4"
-            placeholder="Surname..."
-            required
-            value={surname}
-            onChange={(e) => {
-              setSurname(e.target.value);
+              setUsername(e.target.value);
             }}
           />
         </div>

@@ -18,7 +18,7 @@ export default function EventsPage() {
   return (
     <>
       <Header title={"Events"} />
-      <main className="max-w-[1280px] mx-auto">
+      <main className="max-w-[1280px] mx-auto px-4 pb-4">
         <div className="flex items-center py-8 gap-8">
           <Search />
           <Link
@@ -28,7 +28,7 @@ export default function EventsPage() {
             Create Event
           </Link>
         </div>
-        <div className="grid grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:md-grid-cols2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {events.map((event) => (
             <Event key={event.id} event={event} />
           ))}

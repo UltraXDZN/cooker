@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../components/header";
 import { Link } from "react-router-dom";
+import Button from "../components/Button";
 
 export default function CreateEventPage() {
   const [name, setName] = useState("");
@@ -37,6 +38,9 @@ export default function CreateEventPage() {
     <>
       <Header title={"Create Event"} />
       <form className=" max-w-72 mx-auto py-2">
+        <Link to={"/events"}>
+          <Button name={"All Events"} />
+        </Link>
         <div className="flex flex-col gap-2 py-2">
           <label>
             Name <span className="text-red-400">*</span>
@@ -91,36 +95,6 @@ export default function CreateEventPage() {
             type="text"
             className="rounded-full border-2 py-2 px-4"
             placeholder="Malicius Url..."
-            required
-            value={maliciousUrl}
-            onChange={(e) => {
-              setMaliciusUrl(e.target.value);
-            }}
-          />
-          <input
-            type="text"
-            className="rounded-full border-2 py-2 px-4"
-            placeholder="DNS A..."
-            required
-            value={maliciousUrl}
-            onChange={(e) => {
-              setMaliciusUrl(e.target.value);
-            }}
-          />
-          <input
-            type="text"
-            className="rounded-full border-2 py-2 px-4"
-            placeholder="DNS NS..."
-            required
-            value={maliciousUrl}
-            onChange={(e) => {
-              setMaliciusUrl(e.target.value);
-            }}
-          />
-          <input
-            type="text"
-            className="rounded-full border-2 py-2 px-4"
-            placeholder="DNS MX..."
             required
             value={maliciousUrl}
             onChange={(e) => {

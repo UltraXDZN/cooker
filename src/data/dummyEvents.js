@@ -9,7 +9,13 @@ const dummyEvents = [
     dns_records: ["A record", "NS record"],
     matching_keywords: ["keyword1", "keyword2"],
     status: "todo",
-    analyst_comments: [],
+    analyst_comments: [
+      {
+        comment: "comment 1",
+        timestamp: "2024-01-01T00:00:00",
+        username: "username1",
+      },
+    ],
   },
   {
     id: 2,

@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/header";
 import { Link, useParams } from "react-router-dom";
+import dummyEvents from "../data/dummyEvents";
+import Button from "../components/Button";
 
 export default function EditEventPage() {
   const { eventID } = useParams();
+
+  useEffect(() => {
+    const event = dummyEvents.find((ev) => ev.id === parseInt(eventID));
+    setName(event.name);
+    setAffectedBrand(event.affected_brand);
+    setDescription(event.description);
+    setMaliciusUrl(event.malicious_url);
+    setRegistrationDate(event.malicious_domain_registration_date);
+    setDns(event.dns_records);
+    setKeywords(event.matching_keywords);
+    setStatus(event.status);
+  }, [eventID]);
 
   const [name, setName] = useState("");
   const [affected_brand, setAffectedBrand] = useState("");
@@ -18,23 +32,13 @@ export default function EditEventPage() {
 
   const handleSubmit = () => {};
 
-  const ex = {
-    id: 1,
-    name: "Phishing Attack",
-    affected_brand: "Example Brand",
-    description: "Description of the attack",
-    malicious_url: "http://malicious.com/",
-    malicious_domain_registration_date: "2024-01-01T00:00:00",
-    dns_records: ["A record", "NS record"],
-    matching_keywords: ["keyword1", "keyword2"],
-    status: "todo",
-    analyst_comments: [],
-  };
-
   return (
     <>
-      <Header title={"Create Event"} />
+      <Header title={"Edit Event " + eventID} />
       <form className=" max-w-72 mx-auto py-2">
+        <Link to={"/events"}>
+          <Button name={"All Events"} />
+        </Link>
         <div className="flex flex-col gap-2 py-2">
           <label>
             Name <span className="text-red-400">*</span>
@@ -89,36 +93,6 @@ export default function EditEventPage() {
             type="text"
             className="rounded-full border-2 py-2 px-4"
             placeholder="Malicius Url..."
-            required
-            value={maliciousUrl}
-            onChange={(e) => {
-              setMaliciusUrl(e.target.value);
-            }}
-          />
-          <input
-            type="text"
-            className="rounded-full border-2 py-2 px-4"
-            placeholder="DNS A..."
-            required
-            value={maliciousUrl}
-            onChange={(e) => {
-              setMaliciusUrl(e.target.value);
-            }}
-          />
-          <input
-            type="text"
-            className="rounded-full border-2 py-2 px-4"
-            placeholder="DNS NS..."
-            required
-            value={maliciousUrl}
-            onChange={(e) => {
-              setMaliciusUrl(e.target.value);
-            }}
-          />
-          <input
-            type="text"
-            className="rounded-full border-2 py-2 px-4"
-            placeholder="DNS MX..."
             required
             value={maliciousUrl}
             onChange={(e) => {
